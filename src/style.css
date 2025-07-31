@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Fingers';
+    src: url('fingers.woff2') format('woff2'),
+         url('fingers.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    overscroll-behavior: none;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    width: 100%;
+    min-height: 100svh;
+    margin: 0;
+}
+
+header {
+    position: absolute;
+    top: 0.5rem;
+    left: 1rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+}
+
+[data-pointer] {
+    
+    font-family: Fingers;
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1;
+    padding-top: 1.5rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    user-select: none;
+    pointer-events: none;
+    
+    --translate-x: 0px;
+    --translate-y: 0px;
+    --rotate: 0rad;
+    --scale: 0;
+    
+    transform: translate(var(--translate-x), var(--translate-y)) rotate(var(--rotate)) scale(var(--scale));
+    
+    transition: opacity 0.2s;
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-pointer] {
+        display: none;
+    }
+}
