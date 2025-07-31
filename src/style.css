@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Fingers';
-    src: url('fingers.woff2') format('woff2'),
-         url('fingers.woff') format('woff');
+    src: url('fonts/fingers.woff2') format('woff2'),
+         url('fonts/fingers.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -25,12 +25,14 @@ header {
     position: absolute;
     top: 0.5rem;
     left: 1rem;
+    user-select: none;
 }
 
 footer {
     position: absolute;
     bottom: 0.5rem;
     right: 1rem;
+    user-select: none;
 }
 
 [data-pointer] {
