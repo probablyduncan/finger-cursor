@@ -64,6 +64,9 @@ function initPointer() {
     document.documentElement.addEventListener("mouseleave", fadeOut);
     document.documentElement.addEventListener("mouseenter", fadeIn);
 
+    document.addEventListener("touchmove", dragHandler);
+    document.addEventListener("touchend", touchEndHandler);
+
     requestAnimationFrame(animate);
 }
 
@@ -95,6 +98,16 @@ function scrollHandler() {
     prevScroll = window.scrollY;
 }
 
+function dragHandler(e: TouchEvent) {
+    activate();
+    updatePos(e.touches[0]);
+}
+
+function touchEndHandler(e: TouchEvent) {
+    deactivate();
+    updatePos(e.touches[0]);
+}
+
 function activate() {
     updateIcon("state", "active");
 }
@@ -111,7 +124,7 @@ function fadeIn() {
     pointer.style.opacity = "1";
 }
 
-function updatePos({ clientX, clientY }: MouseEvent) {
+function updatePos({ clientX, clientY }: { clientX: number, clientY: number }) {
     state.mousePos = Vec2.From(
         clientX - pointer.clientWidth / 2,
         clientY - pointer.clientHeight / 2 + prevScroll
@@ -145,7 +158,7 @@ function updateIcon<T extends Exclude<keyof typeof state.icon, "update">>(
 }
 
 function animate(timeStamp: number) {
-    
+
     if (state.icon.state === "normal") {
         // don't update current position if active
         state.currentPos = Vec2.From(POINTER_SPEED).lerp(state.currentPos, state.targetPos);
